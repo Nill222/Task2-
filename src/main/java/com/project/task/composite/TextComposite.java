@@ -1,11 +1,15 @@
 package com.project.task.composite;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class TextComposite implements TextComponent {
+    private static final Logger log = LogManager.getLogger();
     private final ComponentType type;
     private final List<TextComponent> components = new ArrayList<>();
 
@@ -17,7 +21,10 @@ public class TextComposite implements TextComponent {
         return type;
     }
 
-    public void add(TextComponent component){
+    public void add(TextComponent component) {
+        log.debug("Added component of type {} to {}",
+                (component instanceof TextComposite ? ((TextComposite) component).getType() : "LEAF"),
+                type);
         components.add(component);
     }
 
@@ -45,6 +52,7 @@ public class TextComposite implements TextComponent {
         for(TextComponent child : components) {
             count += child.getComponentCount();
         }
+        log.debug("Component count for {} is {}", type, count);
         return count;
     }
 }
