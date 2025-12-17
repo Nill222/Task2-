@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 public class SortServiceImpl implements SortService {
     private static final Logger log = LogManager.getLogger();
+    private static final String REGEX = "[a-zA-Z]+";
 
     @Override
     public int findMaxSentencesWithSimilarWords(TextComposite textComposite) {
@@ -84,7 +85,7 @@ public class SortServiceImpl implements SortService {
                     }
                     String normalized = builder.toString()
                             .toLowerCase()
-                            .replaceAll("[^a-zA-Z]", "");
+                            .replaceAll(REGEX, "");
 
                     if(!normalized.isEmpty()) {
                         words.add(normalized);
