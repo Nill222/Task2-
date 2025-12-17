@@ -32,6 +32,7 @@ public class TextComposite implements TextComponent {
     @Override
     public String buildText() {
         StringBuilder builder = new StringBuilder();
+        //toDo
         for (TextComponent child : components) {
             builder.append(child.buildText());
         }
