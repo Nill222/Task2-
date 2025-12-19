@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class SortServiceImpl implements SortService {
     private static final Logger log = LogManager.getLogger();
-    private static final String REGEX = "[a-zA-Z]+";
+    private static final String WORD_REGEX = "[^a-zA-Z]";
 
     @Override
     public int findMaxSentencesWithSimilarWords(TextComposite textComposite) {
@@ -50,9 +50,9 @@ public class SortServiceImpl implements SortService {
         List<TextComposite> sentences = extractSentences(textComposite);
 
         for(TextComposite sentence : sentences) {
-            List<TextComponent> lexeme = new ArrayList<>(sentence.getComponents());
-            if(lexeme.size() > 1) {
-               Collections.swap(lexeme, 0, lexeme.size() - 1);
+            if(sentence.getComponents().size() > 1) {
+                sentence.swapComponents(0, sentence.getComponents().size() - 1);
+                log.debug("Swapped first and last lexeme in sentence: {}", sentence.buildText());
             }
         }
     }
@@ -85,9 +85,9 @@ public class SortServiceImpl implements SortService {
                     }
                     String normalized = builder.toString()
                             .toLowerCase()
-                            .replaceAll(REGEX, "");
+                            .replaceAll(WORD_REGEX, "");
 
-                    if(!normalized.isEmpty()) {
+                    if(!normalized.isBlank()) {
                         words.add(normalized);
                     }
                 }

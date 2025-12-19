@@ -20,12 +20,12 @@ public class ParagraphToSentenceHandler extends AbstractTextHandler {
         String[] lines = text.split(SENTENCE_REGEX);
 
         for(String line : lines) {
-            if(line.isBlank()) {
+            if(!line.isBlank()) {
                 TextComposite linesComposite = new TextComposite(ComponentType.SENTENCE);
                 composite.add(linesComposite);
-                logger.debug("Created SentenceComposite with content: '{}'", line.trim());
+                logger.debug("Created SentenceComposite with content: '{}'", line.strip());
                 if(nextParser != null) {
-                    nextParser.parse(linesComposite, line.trim());
+                    nextParser.parse(linesComposite, line.strip());
                 }
             }
         }

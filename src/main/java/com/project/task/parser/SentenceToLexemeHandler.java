@@ -20,9 +20,9 @@ public class SentenceToLexemeHandler extends AbstractTextHandler {
             if(!line.isBlank()) {
                 TextComposite linesComposite = new TextComposite(ComponentType.SENTENCE);
                 composite.add(linesComposite);
-                logger.debug("Created LexemeComposite with content: '{}'", line.trim());
+                logger.debug("Created LexemeComposite with content: '{}'", line.strip());
                 if(nextParser != null) {
-                    nextParser.parse(linesComposite, line.trim());
+                    nextParser.parse(linesComposite, line.strip());
                 }
             }
         }

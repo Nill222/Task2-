@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class LexemeToWordHandler extends AbstractTextHandler {
     private static final Logger logger = LogManager.getLogger();
-    private static final String WORD_REGEX = "([a-zA-Z]+])|(.)";
+    private static final String WORD_REGEX = "([a-zA-Z]+)|(\\p{Punct})";
 
     @Override
     public void parse(TextComposite composite, String text) {

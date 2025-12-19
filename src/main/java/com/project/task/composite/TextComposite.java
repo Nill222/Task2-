@@ -21,6 +21,11 @@ public class TextComposite implements TextComponent {
         return type;
     }
 
+    public void swapComponents(int i, int j) {
+        Collections.swap(components, i, j);
+    }
+
+
     public void add(TextComponent component) {
         log.debug("Added component of type {} to {}",
                 (component instanceof TextComposite ? ((TextComposite) component).getType() : "LEAF"),
@@ -39,9 +44,9 @@ public class TextComposite implements TextComponent {
     @Override
     public String buildText() {
         StringBuilder builder = new StringBuilder();
-        //toDo
+        String delimiter = type.getDelimiter();
         for (TextComponent child : components) {
-            builder.append(child.buildText());
+            builder.append(child.buildText()).append(delimiter);
         }
         return builder.toString();
     }
