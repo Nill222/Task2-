@@ -7,7 +7,6 @@ import org.apache.logging.log4j.Logger;
 public class CharacterLeaf implements TextComponent {
     private static final Logger log = LogManager.getLogger();
     private final char value;
-    private final ComponentType type = ComponentType.CHARACTER;
 
     public CharacterLeaf(char value) {
         this.value = value;
